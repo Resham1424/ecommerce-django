@@ -1,3 +1,6 @@
+import os
+import dj_database_url
+from decouple import config
 from pathlib import Path
 
 # Base directory
@@ -6,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 SECRET_KEY = 'your-secret-key'  # Replace with your own secret key
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
 
 # Installed apps
 INSTALLED_APPS = [
@@ -28,6 +31,7 @@ INSTALLED_APPS = [
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',  # optional if using APIs
     'django.middleware.common.CommonMiddleware',
@@ -61,11 +65,9 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database (default SQLite)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(default=config('DATABASE_URL', default='sqlite:///db.sqlite3'))
 }
+
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -92,3 +94,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

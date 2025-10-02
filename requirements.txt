@@ -1,3 +1,7 @@
 ﻿Django==5.2.7
 djangorestframework
-Pillow
+gunicorn
+psycopg2-binary
+whitenoise
+python-decouple
+dj-database-url

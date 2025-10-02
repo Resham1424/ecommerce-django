@@ -1,0 +1,9 @@
+{% extends 'shop/base.html' %}
+{% block title %}Checkout - My Store{% endblock %}
+
+{% block content %}
+<h1>Thank you for your purchase!</h1>
+<p>Your order ID is <strong>{{ order.id }}</strong>.</p>
+<p>Order placed by: {{ order.user.username }}</p>
+<a href="{% url 'home' %}" class="btn btn-primary mt-3">Back to Home</a>
+{% endblock %}

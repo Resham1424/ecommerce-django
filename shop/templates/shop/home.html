@@ -1,0 +1,32 @@
+{% extends 'shop/base.html' %}
+{% block title %}Home - My Store{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Welcome to My E-Commerce Store!</h1>
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            {% else %}
+            <img src="https://via.placeholder.com/300x200.png?text=No+Image" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description|truncatechars:80 }}</p>
+                <p class="card-text"><strong>${{ product.price }}</strong></p>
+                {% if user.is_authenticated %}
+                <form method="post" action="{% url 'add_to_cart' product.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-success w-100">Add to Cart</button>
+                </form>
+                {% else %}
+                <a href="/admin/login/" class="btn btn-secondary w-100">Login to add to cart</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

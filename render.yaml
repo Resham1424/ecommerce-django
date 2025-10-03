@@ -1,10 +1,10 @@
 services:
   - type: web
-    name: resham-ecommerce-db
+    name: resham-ecommerce-db-1
     env: python
     buildCommand: |
       python -m pip install --upgrade pip
       pip install -r requirements.txt
-      python manage.py migrate --noinput
-      python manage.py collectstatic --noinput
+      python manage.py migrate --noinput   # Run database migrations
+      python manage.py collectstatic --noinput  # Collect static files for Whitenoise
     startCommand: gunicorn core.wsgi

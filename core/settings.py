@@ -3,27 +3,17 @@ from pathlib import Path
 import dj_database_url
 from decouple import config
 
-# ----------------------------
-# BASE DIRECTORY
-# ----------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ----------------------------
-# SECURITY SETTINGS
-# ----------------------------
 SECRET_KEY = config("SECRET_KEY", default="django-insecure-resham-secret-key")
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-# Updated ALLOWED_HOSTS for your Render service
 ALLOWED_HOSTS = [
-    "resham-ecommerce-db-1.onrender.com",  # Your new Render URL
+    "resham-ecommerce-db-1.onrender.com",
     "127.0.0.1",
     "localhost"
 ]
 
-# ----------------------------
-# INSTALLED APPS
-# ----------------------------
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -32,20 +22,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Third-party
     'rest_framework',
     'corsheaders',
-
-    # Local apps
     'shop',
 ]
 
-# ----------------------------
-# MIDDLEWARE
-# ----------------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Serve static files
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -54,9 +38,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# ----------------------------
-# URL CONFIGURATION
-# ----------------------------
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
@@ -77,9 +58,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-# ----------------------------
-# DATABASE
-# ----------------------------
 DATABASES = {
     'default': dj_database_url.config(
         default=config(
@@ -90,9 +68,6 @@ DATABASES = {
     )
 }
 
-# ----------------------------
-# PASSWORD VALIDATION
-# ----------------------------
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
@@ -100,28 +75,16 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# ----------------------------
-# INTERNATIONALIZATION
-# ----------------------------
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Asia/Kolkata'
 USE_I18N = True
 USE_TZ = True
 
-# ----------------------------
-# STATIC FILES
-# ----------------------------
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# ----------------------------
-# MEDIA FILES
-# ----------------------------
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"
 
-# ----------------------------
-# DEFAULT PRIMARY KEY FIELD
-# ----------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

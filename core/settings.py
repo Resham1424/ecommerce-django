@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ----------------------------
 SECRET_KEY = config("SECRET_KEY", default="django-insecure-resham-secret-key")
 DEBUG = config("DEBUG", default=False, cast=bool)
-ALLOWED_HOSTS = ["smartshop-db-wxdd.onrender.com", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["resham-ecommerce-db.onrender.com", "127.0.0.1", "localhost"]
 
 # ----------------------------
 # INSTALLED APPS

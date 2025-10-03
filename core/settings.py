@@ -14,9 +14,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY", default="django-insecure-resham-secret-key")
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-# Allowed hosts for Render deployment
+# Updated ALLOWED_HOSTS for your Render service
 ALLOWED_HOSTS = [
-    "resham-ecommerce-db.onrender.com",
+    "resham-ecommerce-db-1.onrender.com",  # Your new Render URL
     "127.0.0.1",
     "localhost"
 ]

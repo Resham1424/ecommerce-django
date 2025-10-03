@@ -13,7 +13,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ----------------------------
 SECRET_KEY = config("SECRET_KEY", default="django-insecure-resham-secret-key")
 DEBUG = config("DEBUG", default=False, cast=bool)
-ALLOWED_HOSTS = ["resham-ecommerce-db.onrender.com", "127.0.0.1", "localhost"]
+
+# Allowed hosts for Render deployment
+ALLOWED_HOSTS = [
+    "resham-ecommerce-db.onrender.com",
+    "127.0.0.1",
+    "localhost"
+]
 
 # ----------------------------
 # INSTALLED APPS
@@ -39,7 +45,7 @@ INSTALLED_APPS = [
 # ----------------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Whitenoise for static files
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Serve static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -56,7 +62,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],  # Global templates folder
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,7 +82,10 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # ----------------------------
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL', default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
+        default=config(
+            'DATABASE_URL',
+            default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
+        ),
         conn_max_age=600,
     )
 }
@@ -100,19 +109,19 @@ USE_I18N = True
 USE_TZ = True
 
 # ----------------------------
-# STATIC FILES (CSS, JS, etc.)
+# STATIC FILES
 # ----------------------------
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ----------------------------
-# MEDIA FILES (Product images)
+# MEDIA FILES
 # ----------------------------
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"
 
 # ----------------------------
-# DEFAULT PRIMARY KEY FIELD TYPE
+# DEFAULT PRIMARY KEY FIELD
 # ----------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
